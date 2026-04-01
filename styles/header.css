@@ -52,11 +52,11 @@ header{
     0 0 28px rgba(0, 229, 255, 0.25);    /* glow layer 2 */
 }
 .custom-label{
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Turret Road', sans-serif;
 }
 .custom-select{
     font-family: 'Turret Road', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     padding: 3px;
 }
