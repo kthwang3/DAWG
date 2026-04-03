@@ -1,4 +1,3 @@
-import { getGame } from "./games.js";
 export let wishlist = JSON.parse(localStorage.getItem('wishlist'));
 if (!wishlist){
   wishlist = [{

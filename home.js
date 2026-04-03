@@ -58,7 +58,7 @@ function renderLibrary() {
 }
 function renderWishlist(){
   let wishlistHTML = ``;
-  wishlist.forEach((game) =>{
+  wishlist.forEach((game,index) =>{
 
     const gameId = game.id;
     const matchingGame = getGame(gameId);
@@ -67,7 +67,7 @@ function renderWishlist(){
     wishlistHTML += `
       <div class = "wishlist-game-container">
         <div class = "ordering-container">
-          <span class = "order">1</span>
+          <span class = "order">${index += 1}</span>
           <div class = "triangle-buttons">                       
             <button class = "up-button">
               <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
