@@ -1,5 +1,8 @@
-export let wishlist = [
-  {
+import { getGame } from "./games.js";
+export let wishlist = JSON.parse(localStorage.getItem('wishlist'));
+if (!wishlist){
+  wishlist = [{
+  
     id: 3498,
     name: "Grand Theft Auto V",
     released: "2013-09-17",
@@ -42,6 +45,19 @@ export let wishlist = [
     tags: ["Steam Achievements", "Multiplayer", "Full controller support", "steam-trading-cards", "Co-op"],
     esrb_rating: "Mature",
     date_added: "3-31-2026"
-  }
+  }];
   
-]
+}
+export function addToWishlist(gameId){
+  let game = getGame(gameId);
+  wishlist.push(game);
+  const d = new Date();
+  const day = d.getDate();
+  const month = d.getMonth() + 1;
+  const year = d.getFullYear();
+  game.date_added = `${month}-${day}-${year}`;
+  saveToStorage();
+}
+function saveToStorage(){
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}

@@ -1,5 +1,5 @@
 import { games } from './data/games.js';
-import {wishlist} from './data/wishlist.js';
+import {wishlist, addToWishlist} from './data/wishlist.js';
 function renderHeader(){
   let headerHTML = ``;
   headerHTML += `
@@ -38,7 +38,7 @@ function renderLibrary() {
       <div class = "library-game-container">
         <div class = "library-game-thumbnail-container">
           <img class = "library-game-thumbnail" src = "${game.background_image}">
-          <button class = "add-to-wishlist">
+          <button class = "add-to-wishlist js-add-to-wishlist" data-game-id = "${game.id}">
             <img class = "plus-icon" src = "icons/plus-icon.svg">
           </button>
         </div>
@@ -46,6 +46,15 @@ function renderLibrary() {
       </div>
     `;
   });
+  document.querySelector('.js-games-grid').innerHTML += libraryHTML;
+  document.querySelectorAll('.js-add-to-wishlist').forEach((button) =>{
+    button.addEventListener('click', () =>{
+      const gameId = button.dataset.gameId;
+      addToWishlist(gameId);
+      renderWishlist();
+    });
+  });
+  
 }
 function renderWishlist(){
   let wishlistHTML = ``;
@@ -82,8 +91,8 @@ function renderWishlist(){
           <span class = "date-added">Added On: ${game.date_added}</span>
           <div class = "ratings-container">
             <span class = "rating">Rating: </span>
-            <img class = "stars" src = "./ratings/rating-45.png">
-            <img class = "esrb-thumbnail" src = "./esrb-ratings/M.svg">
+            <img class = "stars" src = "./ratings/rating-${(Math.round(game.rating * 2)/2)* 10}.png">
+            <img class = "esrb-thumbnail" src = "./esrb-ratings/${game.esrb_rating ?? 'null'}.svg">
           </div>
           <span class = "released">Release Date: 2013-09-17</span>
         </div>

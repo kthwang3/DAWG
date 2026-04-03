@@ -1,3 +1,13 @@
+export function getGame(gameId){
+  let matchingGame;
+  games.forEach((game) =>{
+    if (game.id === gameId){
+      matchingGame = game;
+    }
+    return matchingGame;
+    
+  });
+}
 export const games = [
   {
     id: 3498,
@@ -419,4 +429,5 @@ export const games = [
     tags: ["Multiplayer", "Steam Achievements", "Full controller support", "Co-op", "Steam Cloud"],
     esrb_rating: "Teen"
   }
+    
 ]
