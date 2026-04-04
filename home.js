@@ -28,6 +28,7 @@ function renderHeader(){
       </div>
     </section>
   `;
+  document.querySelector('.js-header').innerHTML = headerHTML;
 }
 function renderLibrary() {
 
