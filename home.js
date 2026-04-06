@@ -3,23 +3,34 @@ import {wishlist, addToWishlist, deleteFromWishlist, moveUp, moveDown} from './d
 function renderHeader(){
   const genres = getGenres();
   let genresHTML = ``;
+  const url = new URL (window.location.href);
+  let searchValue = url.searchParams.get('search') ?? '';
+  let selectedGenre = url.searchParams.get('filter') ?? '';
+  
   genres.forEach((genre) => {
-    genresHTML += `<option value=${genre}>${genre}</option>`;
+    if (genre !== selectedGenre){
+      genresHTML += `<option value="${genre}">${genre}</option>`;
+    }
+    else{
+      genresHTML += `<option value="${genre}" selected>${genre}</option>`;
+    }
+    
   });
   let headerHTML = ``;
   headerHTML += `
     <section class = "header-left-section">
-    <a class = "header-logo-link" href = "/">
+    <a class = "header-logo-link" href = "index.html">
       <div class = "logo">DAWG</div>
     </a>
     </section>
     <section class = "header-middle-section">
-      <input class = "search-bar js-search-bar" type = "text" placeholder = "Search">
+      <input class = "search-bar js-search-bar" type = "text" placeholder = "${(searchValue !==  '') ? searchValue : 'Search'}">
     </section>
     <section class = "header-right-section">
       <div class = "custom-label">
         <label for="genre-filter">Genre:</label>
         <select class = "custom-select" id = "genre-filter">
+          <option value="Select">Select a Genre</option>
           ${genresHTML}
         </select>
       </div>
@@ -28,24 +39,45 @@ function renderHeader(){
   document.querySelector('.js-header').innerHTML = headerHTML;
   document.querySelector('.js-search-bar').addEventListener('keydown', (event) =>{
     if (event.key === 'Enter'){
-      const searchValue = document.querySelector('.js-search-bar').value.toLowerCase();
-      window.location.href = `index.html?search=${searchValue}`;
+      searchValue = document.querySelector('.js-search-bar').value.toLowerCase();
+      //updatePreferences('search', searchValue);
+      window.location.href = `index.html?search=${searchValue}&filter=${selectedGenre}`;
     }
    
   });
+  
+  const genreFilter = document.getElementById('genre-filter');
+  genreFilter.addEventListener('change', () => {
+    selectedGenre = genreFilter.value;
+    //updatePreferences('genre', selectedGenre);
+    if (selectedGenre === 'Select'){
+      window.location.href = `index.html?search=${searchValue}&filter=${''}`;
+    } else{
+      window.location.href = `index.html?search=${searchValue}&filter=${selectedGenre}`;
+    }
+    
+  });
+  
 }
 function renderLibrary() {
   const url = new URL (window.location.href);
   const search = url.searchParams.get('search');
+  const filter = url.searchParams.get('filter');
   let filteredGames = games;
 
-  if (search){
+  if (search && search !== ''){
     filteredGames = filteredGames.filter((game) =>{
       return game.name.toLowerCase().includes(search) 
         || game.tags.some((keyword) => keyword.toLowerCase().includes(search) 
         || game.genres.some((keyword) => keyword.toLowerCase().includes(search)));
     });
   }
+  if (filter && filter !== ''){
+    filteredGames = filteredGames.filter((game) =>{
+      return game.genres.includes(filter);
+    });
+  }
+  
 
   let libraryHTML = ``;
   filteredGames.forEach((game) => {
