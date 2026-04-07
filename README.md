@@ -2,6 +2,22 @@
 
 Game wishlist app that loads catalogue data from RAWG and stores your wishlist in local storage.
 
+## Current Features
+
+- Browse a live RAWG game catalogue (40 games per fetch).
+- Search by game name, tags, or genres.
+- Filter catalogue by genre.
+- Add games to your wishlist with duplicate-prevention checks.
+- Reorder wishlist priority with up/down controls.
+- Remove games from the wishlist.
+- Persist wishlist data in browser `localStorage` (including date added).
+- View game metadata in wishlist cards:
+  - release date
+  - community rating stars
+  - ESRB badge
+  - genre/tag chips
+- Keep API credentials server-side using a Vercel function (`/api/games`) and `RAWG_API_KEY`.
+
 ## Deploying To Vercel
 
 1. Push this project to GitHub.
