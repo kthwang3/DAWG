@@ -1,5 +1,12 @@
 import { games, getGame, loadGamesFetch, getGenres } from './data/games.js';
 import {wishlist, addToWishlist, deleteFromWishlist, moveUp, moveDown} from './data/wishlist.js';
+function getEsrbFileName(esrbRating){
+  const rating = esrbRating ?? 'null';
+  if (rating === 'Everyone 10+'){
+    return 'Everyone-10-plus';
+  }
+  return rating;
+}
 function renderHeader(){
   const genres = getGenres();
   let genresHTML = ``;
@@ -134,6 +141,7 @@ function renderWishlist(){
       return;
     }
 
+    const esrbFileName = encodeURIComponent(getEsrbFileName(matchingGame.esrb_rating));
     wishlistHTML += `
       <div class = "wishlist-game-container">
         <div class = "ordering-container">
@@ -167,7 +175,7 @@ function renderWishlist(){
           <div class = "ratings-container">
             <span class = "rating">Rating: </span>
             <img class = "stars" src = "./ratings/rating-${(Math.round(matchingGame.rating * 2)/2)* 10}.png">
-            <img class = "esrb-thumbnail" src = "./esrb-ratings/${matchingGame.esrb_rating ?? 'null'}.svg">
+            <img class = "esrb-thumbnail" src = "./esrb-ratings/${esrbFileName}.svg">
           </div>
           <span class = "released">Release Date: ${matchingGame.released}</span>
         </div>
