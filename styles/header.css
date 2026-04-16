@@ -1,45 +1,45 @@
 header{
-    font-family: 'Turret Road', sans-serif;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 100px;
-    padding: 36px 36px;
+  font-family: 'Turret Road', sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 100px;
+  padding: 36px 36px;
 }
 .header-logo-link{
-    text-decoration: none;
+  text-decoration: none;
     
 }
 .logo{
-    font-size: 24px;
-    letter-spacing: 5px;
-    color: #fff;
+  font-size: 24px;
+  letter-spacing: 5px;
+  color: #fff;
 }
 .search-bar{
-    font-family: 'Turret Road', sans-serif;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid rgba(0, 229, 255, 0.35);
-    border-radius: 8px;
-    width: 500px;
-    background: #121c33;
-    color: #eaf6ff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  font-family: 'Turret Road', sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 8px;
+  width: 500px;
+  background: #121c33;
+  color: #eaf6ff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 
-    background-image: url('../icons/search.svg');
-    background-size: 18px 18px;
-    background-position: 12px center;
-    background-repeat: no-repeat;
-    padding-left: 42px;
-    
+  background-image: url('../icons/search.svg');
+  background-size: 18px 18px;
+  background-position: 12px center;
+  background-repeat: no-repeat;
+  padding-left: 42px;
+  
 }
 .search-bar::placeholder{
-    color: #eaf6ff;
-    opacity: 1;
+  color: #eaf6ff;
+  opacity: 1;
 }
 
 .search-bar:focus-visible {
@@ -52,11 +52,28 @@ header{
     0 0 28px rgba(0, 229, 255, 0.25);    /* glow layer 2 */
 }
 .custom-label{
-    font-size: 24px;
-    font-family: 'Turret Road', sans-serif;
+  font-size: 24px;
+  font-family: 'Turret Road', sans-serif;
 }
 .custom-select{
-    font-family: 'Turret Road', sans-serif;
-    font-size: 16px;
-    padding: 3px;
+  font-family: 'Turret Road', sans-serif;
+  font-size: 16px;
+  padding: 3px;
+}
+@media(max-width: 1100px){
+  header{
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px 20px;
+  }
+  .header-middle-section{
+    flex: 1 1 100%;
+  }
+  .search-bar{
+    width: 100%;
+    max-width: 100%;
+  }
+  .custom-label{
+    font-size: 20px;
+  }
 }
